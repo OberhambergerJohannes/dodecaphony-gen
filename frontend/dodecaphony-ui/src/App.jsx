@@ -6,15 +6,17 @@ import DownloadButtons from './components/DownloadButtons.jsx';
 import CustomizeSection from './components/CustomizeSection.jsx';
 import Footer from './components/Footer.jsx';
 
-const App = () => (
-    <div>
-        <Header/>
-        <TopSection/>
-        <PieceDisplay/>
-        <DownloadButtons/>
-        <CustomizeSection/>
-        <Footer/>
-    </div>
-);
+function App() {
+    return (
+        <div>
+            <Header/>
+            <TopSection/>
+            <PieceDisplay/>
+            <DownloadButtons/>
+            <CustomizeSection/>
+            <Footer/>
+        </div>
+    )
+}
 
 export default App;
