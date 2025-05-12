@@ -1,5 +1,6 @@
 import React from 'react';
 import {Box, Button, Typography} from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 function TopSection() {
     return (
@@ -11,7 +12,7 @@ function TopSection() {
                 Generate piece now
             </Button>
             <Typography variant="caption" display="block" mt={2}>
-                ⏳ The piece is being generated<br/>It will be ready soon...
+                The piece is being generated<br/> <AccessTimeIcon sx={{ fontSize: 14 }}/> It will be ready soon...
             </Typography>
         </Box>
     )
