@@ -9,15 +9,36 @@ import {Box, CircularProgress} from '@mui/material';
  * @returns {Element}
  * @constructor
  */
-function PieceDisplay({ abcString, loading }) {
+function PieceDisplay({ abcString, loading, zoom = 1.0 }) {
     const notationRef = useAbcNotation(abcString, loading);
     return(
-        <Box display="flex" justifyContent="center" my={4}>
-            <Box width={300} height={200} display="flex" alignItems="center" justifyContent="center" bgcolor="#ddd">
+        <Box display="flex"
+             justifyContent="center"
+             my={4}
+             style={{width: "100%"}}>
+            <Box
+                sx={{
+                    width: "100%",
+                    minWidth: 300,
+                    maxWidth: 500,
+                    minHeight: 120,
+                    maxHeight: 350,
+                    overflowX: "auto", //optional scroll bar
+                    bgcolor: "#ddd",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
                 {loading ? (
                     <CircularProgress color="secondary"/>
                 ) : (
-                    <div ref={notationRef} style={{width: "100%", height: "100%"}} />
+                    <div ref={notationRef} style={{
+                        width: "100%",
+                        transform: `scale(${zoom})`,
+                        transformOrigin: "center left",
+                        height: "auto",
+                    }} />
                 )}
             </Box>
         </Box>
