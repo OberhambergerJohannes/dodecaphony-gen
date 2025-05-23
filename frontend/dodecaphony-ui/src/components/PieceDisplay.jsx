@@ -19,10 +19,10 @@ function PieceDisplay({ abcString, loading, zoom = 1.0 }) {
             <Box
                 sx={{
                     width: "100%",
-                    minWidth: 300,
-                    maxWidth: 500,
-                    minHeight: 120,
-                    maxHeight: 350,
+                    minWidth: 600,
+                    maxWidth: 800,
+                    minHeight: 200,
+                    maxHeight: 200,
                     overflowX: "auto", //optional scroll bar
                     bgcolor: "#ddd",
                     display: "flex",

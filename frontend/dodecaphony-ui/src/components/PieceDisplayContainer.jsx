@@ -11,19 +11,17 @@ export default function PieceDisplayContainer() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        //simulated fetch and fix example of the abcString todo implement
-        setTimeout(() => {
-            setAbcString(
-                // KEIN Titel, KEIN Tempo, KEINE Metadaten, nur Noten und Key
-                `X:1
-M:4/4
-L:1/4
-K:C
-C D E F G A B c C D E F G A B c  C D E F G A B c C D E F G A B c C D E F G A B c  |`
-            );
-            setLoading(false);
-        }, 1000);
+        fetch("http://localhost:8080/api/melody")
+            .then(res => res.text())
+            .then(data => {
+                setAbcString(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
     }, []);
 
-    return <PieceDisplay abcString={abcString} loading={loading} zoom={2.0} />;
+    return <PieceDisplay abcString={abcString} loading={loading} zoom={1.0} />;
 }
