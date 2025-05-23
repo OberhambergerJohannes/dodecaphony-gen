@@ -6,35 +6,33 @@ import java.util.Map;
 
 public class Dodecaphony {
     private final Sequence sequence;
-    private static final Map<Integer, String> notes = new HashMap<>() {
-        {
-            put(1, "c");
-            put(2, "cis");
-            put(3, "d");
-            put(4, "dis");
-            put(5, "e");
-            put(6, "f");
-            put(7, "fis");
-            put(8, "g");
-            put(9, "gis");
-            put(10, "a");
-            put(11, "b");
-            put(12, "h");
-            put(13, "c1");
-            put(14, "cis1");
-            put(15, "d1");
-            put(16, "dis1");
-            put(17, "e1");
-            put(18, "f1");
-            put(19, "fis1");
-            put(20, "g1");
-            put(21, "gis1");
-            put(22, "a1");
-            put(23, "b1");
-            put(24, "h1");
-        }
+    private static final Map<Integer, String> notes = new HashMap<>() {{
+        put(1, "C");
+        put(2, "^C");
+        put(3, "D");
+        put(4, "^D");
+        put(5, "E");
+        put(6, "F");
+        put(7, "^F");
+        put(8, "G");
+        put(9, "^G");
+        put(10, "A");
+        put(11, "_B");
+        put(12, "B");
+        put(13, "c");
+        put(14, "^c");
+        put(15, "d");
+        put(16, "^d");
+        put(17, "e");
+        put(18, "f");
+        put(19, "^f");
+        put(20, "g");
+        put(21, "^g");
+        put(22, "a");
+        put(23, "_b");
+        put(24, "b");
+    }};
 
-    };
 
     Dodecaphony() {
         this.sequence = new Sequence(Sequence.generateBasicSequence());
@@ -53,7 +51,6 @@ public class Dodecaphony {
     }
 
     private String[] getReversedPart() {
-        System.out.println(Arrays.toString(sequence.getReversedSequence()));
         return numbersToNotes(sequence.getReversedSequence());
     }
 
