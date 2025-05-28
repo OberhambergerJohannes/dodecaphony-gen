@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class DodecaphonyController {
 
-    private final Dodecaphony dodecaphony = new Dodecaphony();
-
     @GetMapping("/melody")
     public String getMelody() {
+        Dodecaphony dodecaphony = new Dodecaphony();
         String[] tokens = dodecaphony.getMelody();
         return "X:1\nT:Auto-generated melody\nM:C\nL:1/4\nK:C\n" + String.join(" ", tokens);
     }
