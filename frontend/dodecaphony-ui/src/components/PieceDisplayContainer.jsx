@@ -1,29 +1,33 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import PieceDisplay from './PieceDisplay.jsx';
+import TopSection from './TopSection.jsx';
 
-/**
- * responsible for loading
- * @returns {Element}
- * @constructor
- */
-export default function PieceDisplayContainer() {
+const PieceDisplayContainer = forwardRef((props, ref) => {
     const [abcString, setAbcString] = useState("");
     const [loading, setLoading] = useState(true);
+    const [regenerate, setRegenerate] = useState(false);
 
     useEffect(() => {
-        //simulated fetch and fix example of the abcString todo implement
-        setTimeout(() => {
-            setAbcString(
-                // KEIN Titel, KEIN Tempo, KEINE Metadaten, nur Noten und Key
-                `X:1
-M:4/4
-L:1/4
-K:C
-C D E F G A B c C D E F G A B c  C D E F G A B c C D E F G A B c C D E F G A B c  |`
-            );
-            setLoading(false);
-        }, 1000);
-    }, []);
+        setLoading(true);
+        fetch("http://localhost:8080/api/melody")
+            .then(res => res.text())
+            .then(data => {
+                setAbcString(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
+    }, [regenerate]);
 
-    return <PieceDisplay abcString={abcString} loading={loading} zoom={2.0} />;
-}
+    const handleRegenerate = () => setRegenerate(r => !r);
+
+    return (
+        <>
+            <TopSection onRegenerate={handleRegenerate} />
+            <PieceDisplay ref={ref} abcString={abcString} loading={loading} zoom={1.0}/>
+        </>
+    );
+});
+export default PieceDisplayContainer;
