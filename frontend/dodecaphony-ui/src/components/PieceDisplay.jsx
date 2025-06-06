@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useImperativeHandle, forwardRef} from 'react';
 import useAbcNotation from './useAbcNotation.jsx';
 import {Box, CircularProgress, Button} from '@mui/material';
 import * as ABCJS from "abcjs";
 import 'abcjs/abcjs-audio.css';
+import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 /**
  * show music notes in a "picture"
@@ -11,9 +12,8 @@ import 'abcjs/abcjs-audio.css';
  * @returns {Element}
  * @constructor
  */
-function PieceDisplay({abcString, loading, zoom = 1.0}) {
+const PieceDisplay = forwardRef(({abcString, loading, zoom = 1.0}, ref) => {
     const notationRef = useAbcNotation(abcString, loading);
-
     const [synthControl, setSynthControl] = useState(null);
 
     useEffect(() => {
@@ -30,6 +30,7 @@ function PieceDisplay({abcString, loading, zoom = 1.0}) {
                     displayRestart: true,
                     displayProgress: true
                 });
+
                 control.setTune(visualObj, true, {
                     displayLoop: true,
                     displayProgress: true
@@ -38,6 +39,15 @@ function PieceDisplay({abcString, loading, zoom = 1.0}) {
             });
         }
     }, [loading, abcString]);
+
+    //exposes the download capability for use by the button
+    useImperativeHandle(ref, () => ({
+        downloadWav: () => {
+            if (synthControl) {
+                synthControl.download("music.wav", "audio/wav");
+            }
+        }
+    }));
 
     return (
         <Box display="flex"
@@ -68,14 +78,9 @@ function PieceDisplay({abcString, loading, zoom = 1.0}) {
                         height: "auto",
                     }}/>
                 )}
-                <div id="audio"></div>
-                <Button onClick={() => synthControl?.download('music.wav', 'audio/wav')}
-                        disabled={!synthControl}>
-                    Download
-                </Button>
             </Box>
         </Box>
     );
-}
+})
 
 export default PieceDisplay;

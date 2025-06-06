@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, forwardRef} from "react";
 import PieceDisplay from './PieceDisplay.jsx';
+import DownloadButtons from './DownloadButtons.jsx';
 
 /**
  * responsible for loading
  * @returns {Element}
  * @constructor
  */
-export default function PieceDisplayContainer() {
+const PieceDisplayContainer = forwardRef((props, ref) => {
     const [abcString, setAbcString] = useState("");
     const [loading, setLoading] = useState(true);
 
@@ -23,5 +24,8 @@ export default function PieceDisplayContainer() {
             });
     }, []);
 
-    return <PieceDisplay abcString={abcString} loading={loading} zoom={1.0} />;
-}
+    return (
+        <PieceDisplay ref={ref} abcString={abcString} loading={loading} zoom={1.0}/>
+    );
+});
+export default PieceDisplayContainer;
