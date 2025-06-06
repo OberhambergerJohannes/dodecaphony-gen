@@ -9,7 +9,6 @@ function App() {
     return (
         <>
             <Header/>
-            <TopSection/>
             <Container/>
             <CustomizeSection/>
             <Footer/>

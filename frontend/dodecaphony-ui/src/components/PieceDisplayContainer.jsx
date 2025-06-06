@@ -1,17 +1,14 @@
-import React, {useState, useEffect, forwardRef} from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import PieceDisplay from './PieceDisplay.jsx';
-import DownloadButtons from './DownloadButtons.jsx';
+import TopSection from './TopSection.jsx';
 
-/**
- * responsible for loading
- * @returns {Element}
- * @constructor
- */
 const PieceDisplayContainer = forwardRef((props, ref) => {
     const [abcString, setAbcString] = useState("");
     const [loading, setLoading] = useState(true);
+    const [regenerate, setRegenerate] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         fetch("http://localhost:8080/api/melody")
             .then(res => res.text())
             .then(data => {
@@ -22,10 +19,15 @@ const PieceDisplayContainer = forwardRef((props, ref) => {
                 console.error(err);
                 setLoading(false);
             });
-    }, []);
+    }, [regenerate]);
+
+    const handleRegenerate = () => setRegenerate(r => !r);
 
     return (
-        <PieceDisplay ref={ref} abcString={abcString} loading={loading} zoom={1.0}/>
+        <>
+            <TopSection onRegenerate={handleRegenerate} />
+            <PieceDisplay ref={ref} abcString={abcString} loading={loading} zoom={1.0}/>
+        </>
     );
 });
 export default PieceDisplayContainer;

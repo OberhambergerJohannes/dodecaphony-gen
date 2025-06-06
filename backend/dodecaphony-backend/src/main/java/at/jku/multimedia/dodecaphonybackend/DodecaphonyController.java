@@ -14,6 +14,6 @@ public class DodecaphonyController {
     public String getMelody() {
         Dodecaphony dodecaphony = new Dodecaphony();
         String[] tokens = dodecaphony.getMelody();
-        return "X:1\nT:Auto-generated melody\nM:C\nL:1/4\nK:C\n" + String.join(" ", tokens);
+        return "X:1\nT:Your Personal Dodecaphony Piece\nM:C\nL:1/4\nK:C\n" + String.join(" ", tokens);
     }
 }

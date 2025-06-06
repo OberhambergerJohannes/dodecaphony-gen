@@ -1,17 +1,9 @@
-import React, {useEffect, useState, useImperativeHandle, forwardRef} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import useAbcNotation from './useAbcNotation.jsx';
-import {Box, CircularProgress, Button} from '@mui/material';
+import {Box, CircularProgress} from '@mui/material';
 import * as ABCJS from "abcjs";
 import 'abcjs/abcjs-audio.css';
-import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
-/**
- * show music notes in a "picture"
- * abcString: ABC notation string
- * loading: state of loading music notes as a boolean
- * @returns {Element}
- * @constructor
- */
 const PieceDisplay = forwardRef(({abcString, loading, zoom = 1.0}, ref) => {
     const notationRef = useAbcNotation(abcString, loading);
     const [synthControl, setSynthControl] = useState(null);
@@ -40,7 +32,6 @@ const PieceDisplay = forwardRef(({abcString, loading, zoom = 1.0}, ref) => {
         }
     }, [loading, abcString]);
 
-    //exposes the download capability for use by the button
     useImperativeHandle(ref, () => ({
         downloadWav: () => {
             if (synthControl) {
