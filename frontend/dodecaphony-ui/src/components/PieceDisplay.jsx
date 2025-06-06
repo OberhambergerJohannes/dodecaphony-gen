@@ -35,8 +35,19 @@ const PieceDisplay = forwardRef(({abcString, loading, zoom = 1.0}, ref) => {
     useImperativeHandle(ref, () => ({
         downloadWav: () => {
             if (synthControl) {
-                synthControl.download("music.wav", "audio/wav");
+                try {
+                    synthControl.download("music.wav", "audio/wav");
+                } catch (e) {
+                    alert("Error: Please PLAY the audio before trying to download it :)");
+                }
+                return;
             }
+        },
+        getSVG: () => {
+            if (notationRef.current) {
+                return notationRef.current.querySelector('svg');
+            }
+            return null;
         }
     }));
 
@@ -52,7 +63,7 @@ const PieceDisplay = forwardRef(({abcString, loading, zoom = 1.0}, ref) => {
                     maxWidth: 800,
                     minHeight: 200,
                     maxHeight: 200,
-                    overflowX: "auto", //optional scroll bar
+                    overflowX: "auto",
                     bgcolor: "#ddd",
                     display: "flex",
                     alignItems: "center",
