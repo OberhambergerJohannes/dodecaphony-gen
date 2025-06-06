@@ -76,6 +76,7 @@ To stop the running Docker containers, you can use the `docker stop` command fol
 
 ## Backgroundstart TLDR:
 Start containers in background (-d):
+
     ```bash
     sudo docker run -d -p 8080:8080 oberhamberger/dodecaphony-gen-backend:latest
     sudo docker run -d -p 3000:80 oberhamberger/dodecaphony-gen-frontend:latest
