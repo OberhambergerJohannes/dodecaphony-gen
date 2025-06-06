@@ -44,24 +44,10 @@ Once both containers are running, you can access the Dodecaphony Generator appli
 ## Stopping the Application
 
 To stop the running Docker containers, you can use the `docker stop` command followed by the container ID or name.
+Alternatively, you can stop all running containers:
 
-1.  **List running containers:**
-    ```bash
-    sudo docker ps
-    ```
-    This will show you a list of your running containers, including their IDs and names.
-
-2.  **Stop containers:**
-    Replace `<container_id_or_name>` with the actual ID or name of the frontend and backend containers.
-
-    ```bash
-    sudo docker stop <frontend_container_id_or_name>
-    sudo docker stop <backend_container_id_or_name>
-    ```
-    Alternatively, you can stop all running containers:
-    ```bash
     sudo docker stop $(sudo docker ps -q)
-    ```
+
 
 ---
 
