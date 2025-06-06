@@ -17,9 +17,13 @@ To run the Dodecaphony Generator application, you need to start both the fronten
     ```bash
     sudo docker run -p 8080:8080 oberhamberger/dodecaphony-gen-backend:latest
     ```
-    This command will pull the latest backend Docker image if you don't have it already and run it, mapping port `8080` of your host to port `8080` inside the container.
+    This command will pull the latest backend Docker image if you don't have it already and run it, mapping port `8080` of your host to port `8080`
+    ```bash
+    sudo docker run -p 8080:8080 oberhamberger/dodecaphony-gen-backend:latest
+    ```
+    inside the container.
 
-2.  **Start the Frontend Service:**
+3.  **Start the Frontend Service:**
     Open a **new** terminal or command prompt (keep the backend service running in the first one) and run the following command:
 
     ```bash
@@ -69,6 +73,14 @@ To stop the running Docker containers, you can use the `docker stop` command fol
     ```bash
     sudo docker logs <container_id_or_name>
     ```
+
+## Backgroundstart TLDR:
+Start containers in background (-d):
+    ```bash
+    sudo docker run -d -p 8080:8080 oberhamberger/dodecaphony-gen-backend:latest
+    sudo docker run -d -p 3000:80 oberhamberger/dodecaphony-gen-frontend:latest
+    ```
+* **Frontend:** Navigate to `http://localhost:3000`
 
 ---
 ## Development environment (without Docker)
