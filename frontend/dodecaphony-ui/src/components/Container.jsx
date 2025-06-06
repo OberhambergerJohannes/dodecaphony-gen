@@ -39,11 +39,39 @@ function Container() {
         img.src = svg;
     };
 
+    const handleDownloadHTML = () => {
+        const svgElement = pieceDisplayRef.current.getSVG();
+        if (!svgElement) return;
+
+        const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Music Sheet</title>
+        </head>
+        <body>
+            ${svgElement.outerHTML}
+        </body>
+        </html>
+    `;
+        const blob = new Blob([htmlContent], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "music-sheet.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
     return (
         <>
             <PieceDisplayContainer ref={pieceDisplayRef} />
             <MusicPlayer/>
-            <DownloadButtons onDownloadWAV={handleDownloadWAV} onDownloadPDF={handleDownloadPDF} />
+            <DownloadButtons onDownloadWAV={handleDownloadWAV} onDownloadPDF={handleDownloadPDF} onDownloadHTML={handleDownloadHTML}/>
         </>
     );
 }
