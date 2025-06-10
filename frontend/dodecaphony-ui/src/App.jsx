@@ -10,7 +10,6 @@ function App() {
         <>
             <Header/>
             <Container/>
-            <CustomizeSection/>
             <Footer/>
         </>
     )
